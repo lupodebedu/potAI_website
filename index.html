@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VinePruneTech - Autonomous Vine Pruning Robots</title>
+    <title>potAI - Autonomous Vine Pruning Robots</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -86,6 +86,34 @@
             0% { left: -100%; }
             100% { left: 100%; }
         }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #2c9f6f;
+            transform: translateX(-50%);
+        }
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+        .market-size {
+            transition: all 0.4s ease;
+        }
+        .market-size:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+        }
     </style>
 </head>
 <body class="font-sans text-gray-800">
@@ -97,14 +125,16 @@
                     <div class="flex items-center space-x-2">
                         <i class="fas fa-vine text-3xl text-secondary-600"></i>
                         <span class="text-xl font-bold text-secondary-800">
-                            <span class="text-primary-600">Vine</span>Prune<span class="text-secondary-500">Tech</span>
+                            <span class="text-primary-600">pot</span>AI
                         </span>
                     </div>
                     
                     <div class="hidden md:flex items-center space-x-8">
                         <a href="#problem" class="text-secondary-700 hover:text-primary-600 transition">The Problem</a>
-                        <a href="#solution" class="text-secondary-700 hover:text-primary-600 transition">Our Solution</a>
+                        <a href="#robot" class="text-secondary-700 hover:text-primary-600 transition">Our Robot</a>
                         <a href="#benefits" class="text-secondary-700 hover:text-primary-600 transition">Benefits</a>
+                        <a href="#market" class="text-secondary-700 hover:text-primary-600 transition">Market</a>
+                        <a href="#team" class="text-secondary-700 hover:text-primary-600 transition">Team</a>
                         <a href="#contact" class="text-secondary-700 hover:text-primary-600 transition">Contact</a>
                     </div>
                     
@@ -128,21 +158,25 @@
             <div class="flex flex-col md:flex-row items-center">
                 <div class="md:w-1/2 mb-12 md:mb-0">
                     <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-secondary-800 leading-tight mb-6">
-                        The Future of Vineyard Pruning is <span class="text-primary-600">Autonomous</span>
+                        Autonomous Winter Pruning Robots for <span class="text-primary-600">Vines</span>
                     </h1>
                     <p class="text-lg text-gray-600 mb-8 max-w-2xl">
-                        Our advanced robotics system precisely trims and maintains grapevines, improving yield quality and reducing labor costs by up to 70%.
+                        Advanced robotics for cordon spur vineyards using AI-powered precision pruning technology.
                     </p>
-                    <a href="YOUR_FORM_LINK_HERE" class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-full transition shadow-md font-medium">
-                        Get Started
+                    <a href="#contact" class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-full transition shadow-md font-medium">
+                        Request Information
                     </a>
                 </div>
                 <div class="md:w-1/2 flex justify-center">
                     <div class="relative">
                         <div class="relative w-64 h-64 sm:w-80 sm:h-80 bg-primary-100 rounded-full overflow-hidden flex items-center justify-center">
                             <div class="absolute inset-0 bg-gradient-to-tr from-primary-500 to-primary-700 rounded-full opacity-20 animate-pulse"></div>
+                            <!-- Robot visualization placeholder - replace with actual robot image -->
                             <div class="bg-white p-8 rounded-2xl shadow-xl transform rotate-3">
-                                <i class="fas fa-robot text-7xl text-primary-600"></i>
+                                <div class="flex flex-col items-center">
+                                    <i class="fas fa-robot text-7xl text-primary-600 mb-4"></i>
+                                    <div class="text-xl font-bold text-primary-700">potAI</div>
+                                </div>
                             </div>
                         </div>
                         <div class="absolute -top-4 -left-4 w-24 h-24 rounded-full bg-secondary-200 opacity-60"></div>
@@ -158,8 +192,8 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
                 <div>
-                    <div class="text-3xl font-bold">70%</div>
-                    <div class="text-sm opacity-80">Labor Cost Reduction</div>
+                    <div class="text-3xl font-bold">30-40%</div>
+                    <div class="text-sm opacity-80">Labor Shortage</div>
                 </div>
                 <div>
                     <div class="text-3xl font-bold">95%</div>
@@ -170,8 +204,8 @@
                     <div class="text-sm opacity-80">Operation Capability</div>
                 </div>
                 <div>
-                    <div class="text-3xl font-bold">300+</div>
-                    <div class="text-sm opacity-80">Vines Processed/Hour</div>
+                    <div class="text-3xl font-bold">590k</div>
+                    <div class="text-sm opacity-80">Hectares in Italy</div>
                 </div>
             </div>
         </div>
@@ -182,7 +216,7 @@
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
-                    The Vineyard Pruning Challenge
+                    Challenges of Winter Pruning
                 </h2>
                 <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
             </div>
@@ -195,19 +229,19 @@
                             <ul class="space-y-4">
                                 <li class="flex items-start">
                                     <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                                    <span>High labor costs and worker shortages</span>
+                                    <span>Winter pruning is the most labor-intensive vineyard operation</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                                    <span>Inconsistent pruning quality between workers</span>
+                                    <span>Requires specialized workforce</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                                    <span>Limited pruning windows due to weather and seasons</span>
+                                    <span>Estimated 30-40% labor shortage compared to demand</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
-                                    <span>Difficulty finding skilled pruners</span>
+                                    <span>Incorrect pruning leads to production decreases</span>
                                 </li>
                             </ul>
                         </div>
@@ -216,284 +250,379 @@
                             <ul class="space-y-4">
                                 <li class="flex items-start">
                                     <i class="fas fa-chart-line-down text-red-500 mt-1 mr-3"></i>
-                                    <span>Reduced grape quality and yield</span>
+                                    <span>Risk of incomplete seasonal pruning</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-dollar-sign text-red-500 mt-1 mr-3"></i>
-                                    <span>Higher operational costs</span>
+                                    <span>Increased operational costs</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-clock text-red-500 mt-1 mr-3"></i>
-                                    <span>Longer time to complete pruning</span>
+                                    <span>Time constraints due to limited pruning windows</span>
                                 </li>
                                 <li class="flex items-start">
                                     <i class="fas fa-virus text-red-500 mt-1 mr-3"></i>
-                                    <span>Increased disease risk from improper cuts</span>
+                                    <span>Disease vulnerability from improper cuts</span>
                                 </li>
                             </ul>
                         </div>
+                    </div>
+                    
+                    <div class="mt-12 p-6 bg-secondary-50 rounded-xl border-l-4 border-primary-500">
+                        <div class="flex items-start">
+                            <i class="fas fa-quote-left text-3xl text-primary-500 mr-4 mt-1"></i>
+                            <p class="italic text-gray-700">"Many companies risk not completing seasonal pruning due to lack of pruners, estimated at 30-40% less than needed."</p>
+                        </div>
+                        <p class="text-right mt-4 text-secondary-700 font-medium">- Confagricoltura Emilia Romagna</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- How It Works -->
-    <section id="solution" class="py-20 bg-gradient-to-br from-secondary-50 to-white">
+    <!-- State of the Art -->
+    <section class="py-20 bg-gradient-to-br from-white to-secondary-50">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
-                    How Our Robot Works
+                    State of the Art
                 </h2>
                 <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
-                    <div class="space-y-8">
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="md:w-1/3 flex justify-center">
-                                <div class="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-2xl">
-                                    1
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="font-serif text-xl font-bold text-secondary-800 mb-3">Vine Scanning</h3>
-                                <p class="text-gray-600">
-                                    The robot uses advanced 3D vision to scan each vine, identifying branches, buds, and growth patterns with millimeter precision.
-                                </p>
-                            </div>
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-2/3">
+                            <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Mechanization in Viticulture</h3>
+                            <p class="text-gray-600 mb-4">
+                                In the wine sector, most operations have been mechanized. For winter pruning, the cordon spur system involves an initial pre-pruning phase that's already automated, but the second phase remains manual.
+                            </p>
+                            <p class="text-gray-600">
+                                This second phase represents an important opportunity for automation to make viticulture more efficient and technologically advanced.
+                            </p>
                         </div>
-                        
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="md:w-1/3 flex justify-center">
-                                <div class="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-2xl">
-                                    2
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="font-serif text-xl font-bold text-secondary-800 mb-3">AI Analysis</h3>
-                                <p class="text-gray-600">
-                                    Our proprietary algorithms analyze each vine's structure and health to determine optimal pruning points for maximum yield and quality.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="md:w-1/3 flex justify-center">
-                                <div class="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-2xl">
-                                    3
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="font-serif text-xl font-bold text-secondary-800 mb-3">Precision Pruning</h3>
-                                <p class="text-gray-600">
-                                    Sterilized cutting tools make clean, angled cuts exactly where needed, minimizing disease risk and promoting healthy regrowth.
-                                </p>
-                            </div>
-                        </div>
-                        
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="md:w-1/3 flex justify-center">
-                                <div class="w-20 h-20 rounded-full bg-primary-100 flex items-center justify-center text-primary-600 text-2xl">
-                                    4
-                                </div>
-                            </div>
-                            <div class="md:w-2/3">
-                                <h3 class="font-serif text-xl font-bold text-secondary-800 mb-3">Data Collection</h3>
-                                <p class="text-gray-600">
-                                    Each pruning session generates detailed health reports and growth predictions for your entire vineyard.
-                                </p>
+                        <div class="md:w-1/3 flex justify-center">
+                            <div class="bg-primary-100 rounded-full p-6">
+                                <i class="fas fa-tractor text-6xl text-primary-600"></i>
                             </div>
                         </div>
                     </div>
+                    
+                    <div class="mt-12 p-6 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl border border-primary-200">
+                        <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Autonomous & Efficient Pruning</h3>
+                        <p class="text-gray-700">
+                            A robot capable of performing <span class="font-bold text-primary-600">cordon spur pruning</span> without specialized labor would be the ideal solution. While this technology exists experimentally, it's not yet commercially available.
+                        </p>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Our Robot -->
+    <section id="robot" class="py-20 grape-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Our Robot: potAI
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-primary-500">
+                    <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Recognizes the Vine</h3>
+                    <p class="text-gray-600">
+                        Using YOLO deep learning model, potAI detects key vine components (trunk, shoot, bud...) with high accuracy.
+                    </p>
+                </div>
+                
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-secondary-500">
+                    <div class="w-16 h-16 rounded-full bg-secondary-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-cut text-2xl text-secondary-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Precision Cutting</h3>
+                    <p class="text-gray-600">
+                        Based on element position and count, the robot determines optimal cutting positions using a 6-DOF industrial robotic arm.
+                    </p>
+                </div>
+                
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-green-500">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-map-marked-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Autonomous Navigation</h3>
+                    <p class="text-gray-600">
+                        Using precision GPS and pre-mapping of vineyard layout, the robot navigates between fields and positions itself parallel to vines.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Image placeholder for robot in action -->
+            <div class="mt-16 bg-gray-200 border-2 border-dashed rounded-xl w-full h-64 flex items-center justify-center">
+                <p class="text-gray-500">Robot in vineyard image will be placed here</p>
             </div>
         </div>
     </section>
     
     <!-- Benefits Section -->
-    <section id="benefits" class="py-20 grape-section">
+    <section id="benefits" class="py-20 bg-gradient-to-br from-secondary-50 to-white">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
-                    Sustainable Growth & Savings
-                </h2>
-                <p class="max-w-3xl mx-auto text-gray-600">
-                    Our autonomous pruning robots deliver tangible benefits for vineyards of all sizes.
-                </p>
-                <div class="w-24 h-1 bg-primary-500 mx-auto mt-4"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-primary-500">
-                    <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-sack-dollar text-2xl text-primary-600"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Cost Efficiency</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Reduce labor costs by up to 70%</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Minimize pruning mistakes and vine damage</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Lower worker injury and insurance costs</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Predictable operational expenses</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-secondary-500">
-                    <div class="w-16 h-16 rounded-full bg-secondary-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-grapes text-2xl text-secondary-600"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Quality Improvement</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Consistent pruning enhances grape quality</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Optimized sunlight exposure for each vine</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Increased yield by up to 20%</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Earlier detection of plant diseases</span>
-                        </li>
-                    </ul>
-                </div>
-                
-                <div class="bg-white rounded-2xl p-8 shadow-lg border-t-4 border-green-500">
-                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
-                        <i class="fas fa-leaf text-2xl text-green-600"></i>
-                    </div>
-                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Sustainability</h3>
-                    <ul class="space-y-3">
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Reduced carbon footprint</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Solar-powered operation options</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Minimal soil compaction</span>
-                        </li>
-                        <li class="flex items-start">
-                            <i class="fas fa-check text-green-500 mt-1 mr-2"></i>
-                            <span>Precision resource usage</span>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-    
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-20 bg-gradient-to-br from-white to-secondary-50">
-        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
-                    Vineyard Owners Love Our Robots
+                    Key Benefits
                 </h2>
                 <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
             </div>
             
             <div class="max-w-4xl mx-auto">
                 <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
-                    <div class="flex flex-col md:flex-row items-center mb-8">
-                        <div class="mb-4 md:mb-0 md:mr-6">
-                            <div class="w-24 h-24 rounded-full bg-primary-200 flex items-center justify-center">
-                                <span class="text-3xl text-primary-700 font-bold">EM</span>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 bg-primary-50 rounded-lg">
+                            <div class="text-4xl text-primary-600 mb-4">
+                                <i class="fas fa-clock"></i>
                             </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Continuous Operation</h3>
+                            <p class="text-gray-600">24/7 functionality without interruptions</p>
                         </div>
-                        <div>
-                            <h4 class="font-bold text-xl">Elena Moretti</h4>
-                            <p class="text-secondary-600">Château de la Vallée, Bordeaux</p>
-                            <div class="flex text-yellow-400 mt-2">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
+                        
+                        <div class="p-6 bg-secondary-50 rounded-lg">
+                            <div class="text-4xl text-secondary-600 mb-4">
+                                <i class="fas fa-calendar-alt"></i>
                             </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Efficient Scheduling</h3>
+                            <p class="text-gray-600">Calendar-based pruning interventions tailored to farmer needs</p>
                         </div>
-                    </div>
-                    <p class="text-gray-600 italic text-lg">
-                        "The VineMaster Pro has transformed our vineyard operations. What used to take 15 workers three weeks to prune now takes four robots nine days with better precision. We saw a 22% increase in yield quality the first season. The technology pays for itself in two years."
-                    </p>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-10">
-                    <div class="bg-primary-50 rounded-xl p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-primary-200 mr-3 flex-shrink-0"></div>
-                            <div>
-                                <h4 class="font-bold">Thomas Wagner</h4>
-                                <div class="flex text-yellow-400">
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                </div>
+                        
+                        <div class="p-6 bg-green-50 rounded-lg">
+                            <div class="text-4xl text-green-600 mb-4">
+                                <i class="fas fa-vine"></i>
                             </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Dedicated Training System</h3>
+                            <p class="text-gray-600">Designed specifically for cordon spur systems</p>
                         </div>
-                        <p class="text-gray-600">
-                            "We tried several alternatives but VinePruneTech's precision and durability in our rugged terrain is unmatched. The data collection features are incredibly valuable."
-                        </p>
                     </div>
                     
-                    <div class="bg-secondary-50 rounded-xl p-6">
-                        <div class="flex items-center mb-4">
-                            <div class="w-10 h-10 rounded-full bg-secondary-200 mr-3 flex-shrink-0"></div>
-                            <div>
-                                <h4 class="font-bold">Sofia Rodriguez</h4>
-                                <div class="flex text-yellow-400">
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                    <i class="fas fa-star text-xs"></i>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="text-gray-600">
-                            "As a small biodynamic vineyard, we appreciate the GrapeKeeper Mini's gentle touch and minimal environmental impact. Our vines have never been healthier."
-                        </p>
+                    <div class="mt-12 p-8 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-2xl border border-primary-300">
+                        <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Technical Advantages</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Precision cutting technology minimizes disease risk</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>AI-powered decision making for optimal pruning</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Minimal soil compaction compared to heavy machinery</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Real-time data collection for vineyard health monitoring</span>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
     </section>
     
-    <!-- Simple CTA -->
+    <!-- Market Size -->
+    <section id="market" class="py-20 bg-gradient-to-br from-primary-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Market Opportunity in Italy
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-blue-500">
+                        <div class="text-5xl font-bold text-blue-600 mb-4">590k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">TAM</h3>
+                        <p class="text-gray-600">Total vineyard area in Italy</p>
+                    </div>
+                    
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-green-500">
+                        <div class="text-5xl font-bold text-green-600 mb-4">413k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">SAM</h3>
+                        <p class="text-gray-600">Vineyard area in North & Central Italy</p>
+                    </div>
+                    
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-primary-500">
+                        <div class="text-5xl font-bold text-primary-600 mb-4">330k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">SOM</h3>
+                        <p class="text-gray-600">Cordon spur vineyards in target regions</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+                    <p class="text-gray-600 text-center italic">Data source: ISTAT 2024</p>
+                    <div class="mt-6 bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 flex items-center justify-center">
+                        <p class="text-gray-500">Market infographic will be placed here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Future Steps -->
+    <section class="py-20 bg-gradient-to-br from-secondary-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Our Roadmap
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="relative timeline">
+                    <!-- Roadmap Item 1 -->
+                    <div class="mb-12 ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">NOW</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Technology Research</h3>
+                            <p class="text-gray-600">Studying the latest technologies for implementation</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Roadmap Item 2 -->
+                    <div class="mb-12 ml-0 md:ml-[25%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">12/2025</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">AI Model Development</h3>
+                            <p class="text-gray-600">Creating the AI model for vine recognition</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Roadmap Item 3 -->
+                    <div class="mb-12 ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2026</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Digital Twin</h3>
+                            <p class="text-gray-600">Developing the digital twin simulation</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Roadmap Item 4 -->
+                    <div class="mb-12 ml-0 md:ml-[75%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2027</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Prototype Construction</h3>
+                            <p class="text-gray-600">Building the first functional prototype</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Roadmap Item 5 -->
+                    <div class="ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2028</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Commercialization</h3>
+                            <p class="text-gray-600">Launching potAI to the market</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Team Section -->
+    <section id="team" class="py-20 bg-gradient-to-br from-white to-secondary-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Our Team
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-primary-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-primary-700 font-bold">LS</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Lorenzo Scalet</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>BSc Electronic Engineering</li>
+                        <li>MSc Agricultural Engineering</li>
+                        <li>Embedded Software Developer</li>
+                    </ul>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-secondary-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-secondary-700 font-bold">VG</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Virginia Gaj</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>BSc Environmental Engineering</li>
+                        <li>MSc Agricultural Engineering</li>
+                    </ul>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-green-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-green-700 font-bold">MD</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Mattia Dutto</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>BSc Computer Engineering</li>
+                        <li>MSc Computer Engineering</li>
+                        <li>PhD Candidate in AI</li>
+                    </ul>
+                </div>
+                
+                <!-- Team Member 4 -->
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-blue-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-blue-700 font-bold">GS</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Gabriele Speranza</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>BSc Agricultural Sciences</li>
+                        <li>MSc Agricultural Engineering</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact CTA -->
     <section id="contact" class="py-20 bg-gradient-to-br from-primary-500 to-primary-700 text-white text-center">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">
-                Ready to Automate Your Vineyard Pruning?
+                Ready to Transform Your Vineyard?
             </h2>
             <p class="max-w-2xl mx-auto mb-8">
-                Get started today with our autonomous pruning solution.
+                Get started with our autonomous pruning solution. Contact us for more information or to schedule a demo.
             </p>
-            <a href="YOUR_FORM_LINK_HERE" class="inline-block bg-white hover:bg-gray-100 text-primary-600 px-8 py-3 rounded-full transition shadow-md font-medium text-lg">
+            <a href="mailto:info@portal.it" class="inline-block bg-white hover:bg-gray-100 text-primary-600 px-8 py-3 rounded-full transition shadow-md font-medium text-lg">
                 Contact Us Now
             </a>
+            
+            <div class="mt-12 max-w-md mx-auto bg-white bg-opacity-20 rounded-xl p-6">
+                <p class="font-medium mb-4">Complete our survey to help us better serve your needs</p>
+                <a href="#" class="inline-block bg-secondary-600 hover:bg-secondary-700 text-white px-6 py-2 rounded-full transition">
+                    Take Survey
+                </a>
+            </div>
         </div>
     </section>
     
@@ -505,39 +634,36 @@
                     <div class="flex items-center space-x-2 mb-6">
                         <i class="fas fa-vine text-3xl text-secondary-600"></i>
                         <span class="text-xl font-bold text-secondary-800">
-                            <span class="text-primary-600">Vine</span>Prune<span class="text-secondary-500">Tech</span>
+                            <span class="text-primary-600">pot</span>AI
                         </span>
                     </div>
                     <p class="text-gray-600 mb-4">
-                        Revolutionizing vineyard management through precision automation since 2018.
+                        Advanced robotics for precision viticulture and sustainable agriculture.
                     </p>
                     <div class="flex space-x-4">
                         <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-instagram"></i></a>
                         <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-bold text-lg text-secondary-800 mb-6">Our Robots</h4>
+                    <h4 class="font-bold text-lg text-secondary-800 mb-6">Technology</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">VineMaster Pro</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">GrapeKeeper Mini</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">PruneCraft Hybrid</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Technology Overview</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Compare Models</a></li>
+                        <li><a href="#robot" class="text-gray-600 hover:text-primary-600 transition">How It Works</a></li>
+                        <li><a href="#benefits" class="text-gray-600 hover:text-primary-600 transition">Key Features</a></li>
+                        <li><a href="#future" class="text-gray-600 hover:text-primary-600 transition">Development Roadmap</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Technical Specifications</a></li>
                     </ul>
                 </div>
                 
                 <div>
                     <h4 class="font-bold text-lg text-secondary-800 mb-6">Resources</h4>
                     <ul class="space-y-3">
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Case Studies</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Viticulture Blog</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Pruning Guides</a></li>
-                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">ROI Calculator</a></li>
+                        <li><a href="#problem" class="text-gray-600 hover:text-primary-600 transition">Industry Challenges</a></li>
+                        <li><a href="#market" class="text-gray-600 hover:text-primary-600 transition">Market Analysis</a></li>
                         <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Research Papers</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">FAQs</a></li>
                     </ul>
                 </div>
                 
@@ -545,23 +671,23 @@
                     <h4 class="font-bold text-lg text-secondary-800 mb-6">Contact Us</h4>
                     <ul class="space-y-3">
                         <li class="flex items-start">
-                            <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-2"></i>
-                            <span class="text-gray-600">123 VineTech Blvd, Napa Valley, CA 94558</span>
+                            <i class="fas fa-envelope text-primary-600 mt-1 mr-2"></i>
+                            <span class="text-gray-600">info@portal.it</span>
                         </li>
                         <li class="flex items-start">
                             <i class="fas fa-phone text-primary-600 mt-1 mr-2"></i>
-                            <span class="text-gray-600">(800) VINE-TECH</span>
+                            <span class="text-gray-600">+39 123 456 7890</span>
                         </li>
                         <li class="flex items-start">
-                            <i class="fas fa-envelope text-primary-600 mt-1 mr-2"></i>
-                            <span class="text-gray-600">grow@vineprunetech.com</span>
+                            <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-2"></i>
+                            <span class="text-gray-600">VineTech Park, Emilia-Romagna, Italy</span>
                         </li>
                     </ul>
                 </div>
             </div>
             
             <div class="pt-8 mt-8 border-t border-secondary-200 text-center text-gray-600 text-sm">
-                <p>&copy; 2023 VinePruneTech Inc. All rights reserved. Precision viticulture for a sustainable future.</p>
+                <p>&copy; 2023 potAI. All rights reserved. Transforming viticulture through autonomous robotics.</p>
             </div>
         </div>
     </footer>
