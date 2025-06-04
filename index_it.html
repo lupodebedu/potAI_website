@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>potAI - Robot Autonomo per la Potatura delle Viti</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#f0fdf5',
+                            100: '#dcfce8',
+                            200: '#bbf7d0',
+                            300: '#86efad',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166533',
+                            900: '#14532d',
+                        },
+                        secondary: {
+                            50: '#f7fee7',
+                            100: '#ecfccb',
+                            200: '#d9f99d',
+                            300: '#bef264',
+                            400: '#a3e635',
+                            500: '#84cc16',
+                            600: '#65a30d',
+                            700: '#4d7c0f',
+                            800: '#3f6212',
+                            900: '#365314',
+                        },
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/css">
+        body {
+            scroll-behavior: smooth;
+            background-color: #f9f7f1;
+        }
+        .grape-bg {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2316803d' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1000;
+        }
+        .grape-section {
+            background: linear-gradient(to bottom, rgba(240, 253, 245, 0.9), rgba(220, 252, 232, 0.7)), 
+                        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Ccircle fill='%2315803d' fill-opacity='0.05' cx='50' cy='50' r='3'/%3E%3C/svg%3E");
+        }
+        .hero-pattern {
+            background: radial-gradient(circle at center, rgba(236, 252, 203, 0.6), rgba(220, 252, 232, 0.9)), 
+                        linear-gradient(to bottom, #dcfce8, #bbf7d0);
+        }
+        .robot-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .robot-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+        }
+        .vines-animation {
+            position: relative;
+            overflow: hidden;
+        }
+        .vines-animation::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 5px;
+            background: linear-gradient(to right, transparent, #2c9f6f, transparent);
+            animation: vines 5s infinite linear;
+        }
+        @keyframes vines {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .timeline {
+            position: relative;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 4px;
+            background: #2c9f6f;
+            transform: translateX(-50%);
+        }
+        .team-member:hover {
+            transform: scale(1.05);
+        }
+        .market-size {
+            transition: all 0.4s ease;
+        }
+        .market-size:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const button = document.getElementById('mobileMenuButton');
+            const closeButton = document.getElementById('closeMenuButton');
+            const menu = document.getElementById('mobileMenu');
+            
+            button.addEventListener('click', function() {
+                menu.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            closeButton.addEventListener('click', function() {
+                menu.classList.add('hidden');
+                document.body.style.overflow = '';
+            });
+        });
+    </script>
+</head>
+<body class="font-sans text-gray-800">
+    <header class="vines-animation sticky top-0 z-50 bg-opacity-90 backdrop-blur-sm">
+        <div class="grape-bg border-b border-secondary-300">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <nav class="flex justify-between items-center py-5">
+                    <div class="flex items-center space-x-2">
+                        <img src="images/logo.png" alt="potAI Logo" class="h-20 w-auto">
+                        <span class="text-xl font-bold text-secondary-800">
+                            <span class="text-primary-600">pot</span>AI
+                        </span>
+                    </div>
+                    
+                    <div class="hidden md:flex items-center space-x-8 px-4">
+                        <a href="#problem" class="text-secondary-700 hover:text-primary-600 transition">Il Problema</a>
+                        <a href="#robot" class="text-secondary-700 hover:text-primary-600 transition">Il Nostro Robot</a>
+                        <a href="#benefits" class="text-secondary-700 hover:text-primary-600 transition">Benefici</a>
+                        <a href="#market" class="text-secondary-700 hover:text-primary-600 transition">Mercato</a>
+                        <a href="#team" class="text-secondary-700 hover:text-primary-600 transition">Squadra</a>
+                        <a href="#contact" class="text-secondary-700 hover:text-primary-600 transition">Contatti</a>
+                        <div class="flex items-center space-x-2">
+                            <a href="index_it.html" class="text-secondary-700 hover:text-primary-600 transition font-bold">IT</a>
+                            <span class="text-gray-400">|</span>
+                            <a href="index.html" class="text-primary-600 font-bold">EN</a>
+                        </div>
+                    </div>
+
+
+
+                    <button class="md:hidden text-secondary-800" id="mobileMenuButton">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                    
+                    
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <div id="mobileMenu" class="hidden bg-white bg-opacity-95 z-50 flex flex-col justify-center items-center p-4">
+        <button id="closeMenuButton" class="absolute top-6 right-6 text-2xl text-gray-600">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="flex flex-col items-center space-y-6">
+            <a href="#problem" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">The Problem</a>
+            <a href="#robot" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">Our Robot</a>
+            <a href="#benefits" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">Benefits</a>
+            <a href="#market" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">Market</a>
+            <a href="#team" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">Team</a>
+            <a href="#contact" class="text-2xl text-secondary-700 hover:text-primary-600 transition py-2">Contact</a>
+            <div class="flex items-center space-x-2 mt-8">
+                <a href="index_it.html" class="text-secondary-700 hover:text-primary-600 transition font-bold">IT</a>
+                <span class="text-gray-400">|</span>
+                <a href="index.html" class="text-primary-600 font-bold">EN</a>
+            </div>
+        </div>
+    </div>
+                    
+<div class="hidden md:block">
+</div>
+
+    <section class="hero-pattern">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-12 md:mb-0">
+                    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold text-secondary-800 leading-tight mb-6">
+                        Robot Autonomi per la Potatura Invernale delle <span class="text-primary-600">Viti</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-2xl">
+                       Robotica avanzata per vigneti a cordone speronato che utilizza tecnologia di potatura di precisione basata su AI.
+                    </p>
+                    <a href="#contact" class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-full transition shadow-md font-medium">
+                        Richiedi Informazioni
+                    </a>
+                </div>
+                <div class="md:w-1/2 flex justify-center">
+                    <div class="relative bg-green-50 rounded-3xl p-8 shadow-lg">
+                        <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-amber-50 rounded-3xl opacity-60 -rotate-2"></div>
+                        <div class="relative flex items-center justify-center min-h-[280px]">
+                            <img src="images/logo.png" alt="potAI Logo" class="h-100 w-auto">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="bg-gradient-to-r from-primary-500 to-primary-700 text-white py-12">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-3xl font-bold">30-40%</div>
+                    <div class="text-sm opacity-80">Carenza di Manodopera</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold">95%</div>
+                    <div class="text-sm opacity-80">Precisione di Potatura</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold">24/7</div>
+                    <div class="text-sm opacity-80">Capacità Operativa</div>
+                </div>
+                <div>
+                    <div class="text-3xl font-bold">590k</div>
+                    <div class="text-sm opacity-80">Ettari in Italia</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="problem" class="py-20 bg-secondary-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Sfide della Potatura Invernale
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Problemi Attuali</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
+                                    <span>La potatura invernale è l'operazione più intensiva in termini di manodopera nel vigneto</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
+                                    <span>Richiede manodopera specializzata</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
+                                    <span>Si stima una carenza di manodopera del 30-40% rispetto alla domanda</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-exclamation-circle text-red-500 mt-1 mr-3"></i>
+                                    <span>La potatura errata porta a diminuzioni della produzione</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Impatto sui Vigneti</h3>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <i class="fas fa-chart-line-down text-red-500 mt-1 mr-3"></i>
+                                    <span>Rischio di potatura stagionale incompleta</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-dollar-sign text-red-500 mt-1 mr-3"></i>
+                                    <span>Aumento dei costi operativi</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-clock text-red-500 mt-1 mr-3"></i>
+                                    <span>Vincoli di tempo dovuti a finestre di potatura limitate</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <i class="fas fa-virus text-red-500 mt-1 mr-3"></i>
+                                    <span>Vulnerabilità alle malattie da tagli impropri</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 p-6 bg-secondary-50 rounded-xl border-l-4 border-primary-500">
+                        <div class="flex items-start">
+                            <i class="fas fa-quote-left text-3xl text-primary-500 mr-4 mt-1"></i>
+                            <p class="italic text-gray-700">"Molte aziende rischiano di non completare la potatura stagionale per mancanza di potatori, stimata nel 30-40% in meno del necessario."</p>
+                        </div>
+                        <p class="text-right mt-4 text-secondary-700 font-medium">- Confagricoltura Emilia Romagna</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-gradient-to-br from-white to-secondary-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Stato dell'Arte
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
+                    <div class="flex flex-col md:flex-row gap-8 items-center">
+                        <div class="md:w-2/3">
+                            <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Meccanizzazione in Viticoltura</h3>
+                            <p class="text-gray-600 mb-4">
+                                Nel settore vitivinicolo, la maggior parte delle operazioni è stata meccanizzata. Per la potatura invernale, il sistema a cordone speronato prevede una fase iniziale di prepotatura già automatizzata, ma la seconda fase rimane manuale.
+                            </p>
+                            <p class="text-gray-600">
+                                Questa seconda fase rappresenta un'importante opportunità di automazione per rendere la viticoltura più efficiente e tecnologicamente avanzata.
+                            </p>
+                        </div>
+                        <div class="md:w-1/3 flex justify-center">
+                            <div class="bg-primary-100 rounded-full p-6">
+                                <i class="fas fa-tractor text-6xl text-primary-600"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 p-6 bg-gradient-to-r from-primary-50 to-secondary-50 rounded-xl border border-primary-200">
+                        <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Potatura Autonoma ed Efficiente</h3>
+                        <p class="text-gray-700">
+                            Un robot in grado di eseguire la <span class="font-bold text-primary-600">potatura a cordone speronato</span> senza manodopera specializzata sarebbe la soluzione ideale. Sebbene questa tecnologia esista a livello sperimentale, non è ancora disponibile commercialmente.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="robot" class="py-20 grape-section">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Il Nostro Robot: potAI
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-primary-500">
+                    <div class="w-16 h-16 rounded-full bg-primary-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-eye text-2xl text-primary-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Riconosce la Vite</h3>
+                    <p class="text-gray-600">
+                        Utilizzando il modello di deep learning YOLO, potAI rileva i componenti chiave della vite (tronco, germoglio, gemma...) con elevata precisione.
+                    </p>
+                </div>
+                
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-secondary-500">
+                    <div class="w-16 h-16 rounded-full bg-secondary-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-cut text-2xl text-secondary-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Taglio di Precisione</h3>
+                    <p class="text-gray-600">
+                        In base alla posizione e al conteggio degli elementi, il robot determina le posizioni di taglio ottimali utilizzando un braccio robotico industriale a 6 gradi di libertà.
+                    </p>
+                </div>
+                
+                <div class="robot-card bg-white rounded-2xl p-8 shadow-lg border-t-4 border-green-500">
+                    <div class="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-6">
+                        <i class="fas fa-map-marked-alt text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-secondary-800 mb-4">Navigazione Autonoma</h3>
+                    <p class="text-gray-600">
+                        Utilizzando GPS di precisione e la pre-mappatura del layout del vigneto, il robot naviga tra i campi e si posiziona parallelamente alle viti.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="benefits" class="py-20 bg-gradient-to-br from-secondary-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Benefici Chiave
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-lg p-8 md:p-12">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="p-6 bg-primary-50 rounded-lg">
+                            <div class="text-4xl text-primary-600 mb-4">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Funzionamento Continuo</h3>
+                            <p class="text-gray-600">Funzionalità 24 ore su 24, 7 giorni su 7 senza interruzioni</p>
+                        </div>
+                        
+                        <div class="p-6 bg-secondary-50 rounded-lg">
+                            <div class="text-4xl text-secondary-600 mb-4">
+                                <i class="fas fa-calendar-alt"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Pianificazione Efficiente</h3>
+                            <p class="text-gray-600">Interventi di potatura basati su calendario e adattati alle esigenze dell'agricoltore</p>
+                        </div>
+                        
+                        <div class="p-6 bg-green-50 rounded-lg">
+                            <div class="text-4xl text-green-600 mb-4">
+                                <i class="fas fa-vine"></i>
+                            </div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Sistema di Formazione Dedicato</h3>
+                            <p class="text-gray-600">Progettato specificamente per sistemi a cordone speronato</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-12 p-8 bg-gradient-to-r from-primary-100 to-secondary-100 rounded-2xl border border-primary-300">
+                        <h3 class="font-serif text-2xl font-bold text-secondary-800 mb-4">Vantaggi Tecnici</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>La tecnologia di taglio di precisione minimizza il rischio di malattie</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Processo decisionale basato su AI per una potatura ottimale</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Compattazione minima del suolo rispetto ai macchinari pesanti</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-3"></i>
+                                <span>Raccolta dati in tempo reale per il monitoraggio della salute del vigneto</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="market" class="py-20 bg-gradient-to-br from-primary-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Opportunità di Mercato in Italia
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-blue-500">
+                        <div class="text-5xl font-bold text-blue-600 mb-4">590k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">TAM</h3>
+                        <p class="text-gray-600">Superficie totale del vigneto in Italia</p>
+                    </div>
+                    
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-green-500">
+                        <div class="text-5xl font-bold text-green-600 mb-4">413k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">SAM</h3>
+                        <p class="text-gray-600">Superficie del vigneto nel Nord e Centro Italia</p>
+                    </div>
+                    
+                    <div class="market-size bg-white rounded-2xl p-8 shadow-lg text-center border-b-4 border-primary-500">
+                        <div class="text-5xl font-bold text-primary-600 mb-4">330k</div>
+                        <h3 class="font-bold text-lg text-secondary-800 mb-2">SOM</h3>
+                        <p class="text-gray-600">Vigneti a cordone speronato nelle regioni target</p>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+                    <p class="text-gray-600 text-center italic">Fonte dati: ISTAT 2024</p>
+                    <div class="mt-6 bg-gray-200 border-2 border-dashed rounded-xl w-full h-48 flex items-center justify-center">
+                        <p class="text-gray-500">L'infografica di mercato sarà posizionata qui</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="py-20 bg-gradient-to-br from-secondary-50 to-white">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    La Nostra Roadmap
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+             <div class="max-w-4xl mx-auto">
+                <div class="relative timeline">
+                    <div class="mb-12 ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">OGGI</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Ricerca Tecnologica</h3>
+                            <p class="text-gray-600">Studio delle ultime tecnologie per l'implementazione</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-12 ml-0 md:ml-[25%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">12/2025</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Sviluppo Modello AI</h3>
+                            <p class="text-gray-600">Creazione del modello AI per il riconoscimento della vite</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-12 ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2026</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Digital Twin</h3>
+                            <p class="text-gray-600">Sviluppo della simulazione del digital twin</p>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-12 ml-0 md:ml-[75%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2027</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Costruzione Prototipo</h3>
+                            <p class="text-gray-600">Costruzione del primo prototipo funzionante</p>
+                        </div>
+                    </div>
+                    
+                    <div class="ml-0 md:ml-[50%] pl-8 md:pl-12 relative">
+                        <div class="absolute left-0 md:left-[-8px] top-3 w-4 h-4 rounded-full bg-primary-600 z-10"></div>
+                        <div class="bg-white p-6 rounded-xl shadow-lg border-l-4 border-primary-500">
+                            <div class="text-primary-600 font-bold mb-2">2028</div>
+                            <h3 class="font-bold text-lg text-secondary-800 mb-2">Commercializzazione</h3>
+                            <p class="text-gray-600">Lancio di potAI sul mercato</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="team" class="py-20 bg-gradient-to-br from-white to-secondary-50">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-secondary-800 mb-4">
+                    Il Nostro Team
+                </h2>
+                <div class="w-24 h-1 bg-primary-500 mx-auto"></div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-primary-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-primary-700 font-bold">LS</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Lorenzo Scalet</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>Laurea in Ingegneria Elettronica</li>
+                        <li>Laurea Magistrale in Ingegneria Agraria</li>
+                        <li>Sviluppatore Software Embedded</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-secondary-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-secondary-700 font-bold">VG</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Virginia Gaj</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>Laurea in Ingegneria Ambientale</li>
+                        <li>Laurea Magistrale in Ingegneria Agraria</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-green-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-green-700 font-bold">MD</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Mattia Dutto</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>Laurea in Ingegneria Informatica</li>
+                        <li>Laurea Magistrale in Ingegneria Informatica</li>
+                        <li>Dottorando in AI</li>
+                    </ul>
+                </div>
+                
+                <div class="team-member bg-white rounded-2xl p-6 shadow-lg text-center transition duration-300">
+                    <div class="w-32 h-32 rounded-full bg-blue-100 mx-auto mb-6 flex items-center justify-center">
+                        <span class="text-3xl text-blue-700 font-bold">GS</span>
+                    </div>
+                    <h3 class="font-bold text-xl text-secondary-800 mb-2">Gabriele Speranza</h3>
+                    <ul class="text-gray-600 text-sm space-y-1">
+                        <li>Laurea in Scienze Agrarie</li>
+                        <li>Laurea Magistrale in Ingegneria Agraria</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="py-20 bg-gradient-to-br from-primary-500 to-primary-700 text-white text-center">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-3xl md:text-4xl font-bold mb-6">
+                Pronto a Trasformare il Tuo Vigneto?
+            </h2>
+            <p class="max-w-2xl mx-auto mb-8">
+                Se sei interessato, contattaci per maggiori informazioni.
+            </p>
+            <a href="mailto:info@potai.it" class="inline-block bg-white hover:bg-gray-100 text-primary-600 px-8 py-3 rounded-full transition shadow-md font-medium text-lg">
+                Contattaci Ora
+            </a>
+            
+            <div class="mt-12 max-w-md mx-auto bg-white bg-opacity-20 rounded-xl p-6">
+                <p class="font-medium mb-4">Completa il nostro sondaggio per aiutarci a servire meglio le tue esigenze</p>
+                <a href="https://forms.gle/u75Ce3k79uJzivPcA" class="inline-block bg-secondary-600 hover:bg-secondary-700 text-white px-6 py-2 rounded-full transition">
+                    Fai il Sondaggio
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <footer class="grape-bg border-t border-secondary-200 pt-16 pb-8">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-6">
+                        <i class="fas fa-vine text-3xl text-secondary-600"></i>
+                        <span class="text-xl font-bold text-secondary-800">
+                            <span class="text-primary-600">pot</span>AI
+                        </span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Advanced robotics for precision viticulture and sustainable agriculture.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-secondary-700 hover:text-primary-600 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg text-secondary-800 mb-6">Technology</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#robot" class="text-gray-600 hover:text-primary-600 transition">How It Works</a></li>
+                        <li><a href="#benefits" class="text-gray-600 hover:text-primary-600 transition">Key Features</a></li>
+                        <li><a href="#future" class="text-gray-600 hover:text-primary-600 transition">Development Roadmap</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Technical Specifications</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg text-secondary-800 mb-6">Resources</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#problem" class="text-gray-600 hover:text-primary-600 transition">Industry Challenges</a></li>
+                        <li><a href="#market" class="text-gray-600 hover:text-primary-600 transition">Market Analysis</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">Research Papers</a></li>
+                        <li><a href="#" class="text-gray-600 hover:text-primary-600 transition">FAQs</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold text-lg text-secondary-800 mb-6">Contact Us</h4>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-envelope text-primary-600 mt-1 mr-2"></i>
+                            <span class="text-gray-600">info@potai.it</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-phone text-primary-600 mt-1 mr-2"></i>
+                            <span class="text-gray-600">+39 123 456 7890</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-primary-600 mt-1 mr-2"></i>
+                            <span class="text-gray-600">VineTech Park, Emilia-Romagna, Italy</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="pt-8 mt-8 border-t border-secondary-200 text-center text-gray-600 text-sm">
+                <p>&copy; 2023 potAI. All rights reserved. Transforming viticulture through autonomous robotics.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const button = document.getElementById('mobileMenuButton');
+        const closeButton = document.getElementById('closeMenuButton');
+        const menu = document.getElementById('mobileMenu');
+        const menuLinks = menu.querySelectorAll('a[href^="#"]');
+
+        function closeMenu() {
+            menu.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        button.addEventListener('click', function () {
+            menu.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeButton.addEventListener('click', closeMenu);
+
+        menuLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    });
+</script>
+
+
+
+
+</html>
+
